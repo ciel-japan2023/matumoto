@@ -1,0 +1,169 @@
+<html>
+
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>数字当てゲーム</title>
+
+	<style>
+    	/* ここにCSSを書く */
+
+		#top{
+			margin-bottom: 5%;
+		}
+
+		#history{
+			width: 80%;
+			height: 50%;
+			overflow-y: scroll;
+		}
+
+		#status{
+			margin-top: 5%;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- ここに画面に表示する内容を書く -->
+	<div id="top">0~1000の間でランダムに生成された数字を当ててください。</div>
+	<label>入力された数字</label>
+	<div id="history"></div>
+	<div id="test"></div>
+
+	<div>
+		<label id="status"></label>
+		<br>
+		<input type="text" id="UserInput"/>
+		
+		
+		<input type="submit" id="button" value="GO"/>
+	</div>
+	
+	
+		<script>
+
+			var status;
+
+			document.getElementById("status").innerHTML = ("数値を入力してください！");
+
+   				let Judgementarray = [];
+                //  勝敗の文字を格納する配列を宣言してるよ
+ 			
+				let Random = Math.floor(Math.random()*1001);
+                // 0-1000のランダムを作ってるよ
+
+				document.getElementById('UserInput').focus();
+				// 読み込み時にフォームが選択されてるよ
+
+
+            	document.getElementById("button").onclick = function(){
+                
+					let UserInputInteger= $("#UserInput").val();
+					let go = parseInt(UserInputInteger);
+					// プレイヤーが入力した数値を整数化してるよ
+
+					var NoInput = isNaN(go);
+					// 数値が入力されてないとtrueが返ってくるよ
+				
+					var textForm = document.getElementById("UserInput");
+					textForm.value = '';
+					// 入力フォームを消してるよ
+					
+			
+					// document.getElementById("test").innerHTML = (go);
+					//暫定文字表示
+
+
+
+					var inputData = UserInputInteger;
+					// ユーザーからの入力を受け取る
+			
+
+					if (inputData === null) {
+
+
+						console.log("ユーザーがキャンセルボタンをクリックしました。"); // ユーザーがキャンセルした場合
+
+					} else if (inputData === "") {
+
+						var textElement = document.getElementById("status"); 
+						// ここで "myText" は要素のIDです。要素のIDに合わせて変更してください。
+						// テキストの色を赤に変更
+						textElement.style.color = "red";
+
+						console.log("ユーザーは空の文字列を入力しました。"); // ユーザーが何も入力しなかった場合
+					} 
+						else if (NoInput == false){
+
+							var textElement = document.getElementById("status"); 
+							// ここで "myText" は要素のIDです。要素のIDに合わせて変更してください。
+							// テキストの色を赤に変更
+							textElement.style.color = "black";
+
+							if (go == Random){
+								//document.getElementById("history").innerHTML = ("あなたの数値は"+go+"で、相手の数値は"+Random+"なので一緒です");
+								//Judgementarray.push("<div>あなたの数値は"+go+"で、相手の数値は"+Random+"なので一緒です。</div>");
+								Judgementarray.push("<div>あなたの数値は"+go+"で、正解です。</div>");
+							}
+							else if (go > Random){
+								//document.getElementById("history").innerHTML = ("あなたの数値は"+go+"で、相手の数値は"+Random+"なのであなたの方が大きいです");
+								//Judgementarray.push("<div>あなたの数値は"+go+"で、相手の数値は"+Random+"なのであなたの方が大きいです。</div>");
+								Judgementarray.push("<div>あなたの数値の"+go+"のほうが大きいです。</div>");
+							}
+							else if (go < Random){
+								//document.getElementById("history").innerHTML = ("あなたの数値は"+go+"で、相手の数値は"+Random+"なのであなたの方が小さいです");
+								//Judgementarray.push("<div>あなたの数値は"+go+"で、相手の数値は"+Random+"なのであなたの方が小さいです。</div>");
+								Judgementarray.push("<div>あなたの数値の"+go+"のほうが小さいです。</div>");
+							}
+						
+							document.getElementById("history").innerHTML = Judgementarray.join("");
+						} else {
+							console.log("ユーザーは数字以外の文字列を入力しました。") 
+							// ユーザーが何も入力しなかった場合
+							// 「数字以外が入力されました。数字を入力してください。」
+
+							document.getElementById("status").textContent = ("数字以外が入力されました。数字を入力してください！");
+
+
+							
+							var textElement = document.getElementById("status"); 
+							// ここで "myText" は要素のIDです。要素のIDに合わせて変更してください。
+							// テキストの色を赤に変更
+							textElement.style.color = "red";
+
+						}
+					
+			
+
+
+					//if (NoInput == true){
+						// red1 = ("<style color="red">数字を入力してください")
+						// document.getElementById("status").innerHTML = (red1);
+
+					//	var textElement = document.getElementById("status"); 
+						// ここで "myText" は要素のIDです。要素のIDに合わせて変更してください。
+						// テキストの色を赤に変更
+					//	textElement.style.color = "red";
+
+					//}
+
+
+
+
+				
+
+
+      		      }   
+
+
+
+        </script>
+</body>
+</html>
+
+
+

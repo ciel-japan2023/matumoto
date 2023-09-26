@@ -1,0 +1,79 @@
+<html>
+
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>数字当てゲーム</title>
+
+	<style>
+    	/* ここにCSSを書く */
+
+		#top{
+			margin-bottom: 5%;
+		}
+
+		#history{
+			width: 80%;
+			height: 50%;
+			overflow-y: scroll;
+		}
+
+		#status{
+			margin-top: 5%;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- ここに画面に表示する内容を書く -->
+	<div id="top">0~1000の間でランダムに生成された数字を当ててください。</div>
+	<label>入力された数字</label>
+	<div id="history"></div>
+	<div id="test"></div>
+
+	<div>
+		<label id="status"></label>
+		<br>
+		<input type="text" id="UserInput"/>
+		
+		
+		<input type="submit" id="button" value="GO"/>
+	</div>
+	
+	
+		<script>
+
+			var status;
+
+			document.getElementById("status").innerHTML = ("数値を入力してください！");
+
+   				let Judgementarray = [];
+                //  勝敗の文字を格納する配列を宣言してるよ
+ 			let i;
+            let j;
+                for (i=0; i<100; i++){
+                     j = 100+i;
+
+
+
+
+                }
+
+
+
+				
+
+
+      	  
+
+
+
+        </script>
+</body>
+</html>
+
+
+

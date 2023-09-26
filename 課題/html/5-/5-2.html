@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>練習問題01</title>
+	<style>
+    	/* ここにCSSを書く */
+	</style>
+   </head>
+<body>
+            入力フォーム<input type="text" id="text" />
+            <button id="button">入力ボタン</button>
+            <button id="de">消去ボタン</button>
+        <div id="test"></div>
+        <script>
+            // ここにJavaScriptを書く
+            $("#button").on("click", function(){
+                $("#test").append($("#text").val());
+            });
+            $("#de").on("click", function(){
+                $("#test").append($("#test").text(""));
+            });
+
+
+
+
+
+
+        </script>
+
+
+      
+        <div>HellowWrold</div>
+    </script>
+</body>
+
+</html>

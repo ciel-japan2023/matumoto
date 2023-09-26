@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>インベーダーゲーム</title>
+    <style>
+        #game-container {
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        .player {
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .enemy {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="player" id="player"></div>
+    </div>
+    <script>
+        // ゲームオブジェクト
+        const gameContainer = document.getElementById("game-container");
+        const player = document.getElementById("player");
+        let playerX = 185; // プレイヤーの初期位置
+
+        // プレイヤーの初期位置設定
+        player.style.left = playerX + "px";
+
+        // キーボードイベントリスナー
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowLeft" && playerX > 10) {
+                playerX -= 10;
+                player.style.left = playerX + "px";
+            } else if (event.key === "ArrowRight" && playerX < 360) {
+                playerX += 10;
+                player.style.left = playerX + "px";
+            }
+        });
+
+        // 敵を生成する関数
+        function createEnemy() {
+            const enemy = document.createElement("div");
+            enemy.className = "enemy";
+            const enemyX = Math.floor(Math.random() * 370); // ランダムな位置に敵を配置
+            enemy.style.left = enemyX + "px";
+            gameContainer.appendChild(enemy);
+
+            // 敵を下に移動させるアニメーション
+            const enemyMoveInterval = setInterval(function () {
+                const enemyY = enemy.offsetTop;
+                if (enemyY < 380) {
+                    enemy.style.top = enemyY + 10 + "px";
+                } else {
+                    clearInterval(enemyMoveInterval);
+                    gameContainer.removeChild(enemy);
+                }
+            }, 200);
+        }
+
+        // 定期的に敵を生成
+        setInterval(createEnemy, 1000);
+    </script>
+</body>
+</html>

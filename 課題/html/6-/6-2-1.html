@@ -1,0 +1,1197 @@
+<html>
+
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>電卓</title>
+
+	<style>
+    	/* ここにCSSを書く */
+		input{
+			width: 275px;
+		}
+
+		button{
+			/* width: 15%;
+			height: 15%; */
+			width: 50px;
+			height: 30px;
+		}
+
+		#display{
+			text-align: right;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- ここに画面に表示する内容を書く -->
+	<div id="calculator">
+		<table>
+			<tr>
+				
+					<input type="text" maxlength="5" id="display" readonly />
+				
+			</tr>
+			<tr>
+				<td>
+					<!-- 戻るボタン -->
+					<button id="button_back">▷</button>
+
+					<!-- 7ボタン -->
+					<button id="button_7">7</button>
+
+					<!-- 8ボタン -->
+					<button id="button_8">8</button>
+
+					<!-- 9ボタン -->
+					<button id="button_9">9</button>
+
+					<!-- 割り算ボタン -->
+					<button id="button_division">÷</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<!-- クリアボタン -->
+					<button id="button_c">C</button>
+
+					<!-- 4ボタン -->
+					<button id="button_4">4</button>
+
+					<!-- 5ボタン -->
+					<button id="button_5">5</button>
+
+					<!-- 6ボタン -->
+					<button id="button_6">6</button>
+
+					<!-- 掛け算ボタン -->
+					<button id="button_multiplication">×</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<!-- オールクリアボタン -->
+					<button id="button_ac">AC</button>
+
+					<!-- 1ボタン -->
+					<button id="button_1">1</button>
+
+					<!-- 2ボタン -->
+					<button id="button_2">2</button>
+
+					<!-- 3ボタン -->
+					<button id="button_3">3</button>
+
+					<!-- 引き算ボタン -->
+					<button id="button_subtraction">-</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<!-- 0ボタン -->
+					<button id="button_0">0</button>
+
+					<!-- 00ボタン -->
+					<button id="button_00">00</button>
+
+					<!-- ドットボタン -->
+					<button id="button_dot">.</button>
+
+					<!-- 計算ボタン -->
+					<button id="button_calculation">=</button>
+
+					<!-- 足し算ボタン -->
+					<button id="button_addition">+</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	<script>
+	    // ここにJavaScriptを書く
+		
+		let FirstArray = [];
+		let SecondArray = [];
+		let First ="";
+        let Second = "";
+		var display = "";
+        let operator = "";
+        let result = "";
+        
+        
+        
+        // 0ボタン押下時の処理
+		$("#button_0").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+                if (Second.length <= 8){
+                    //console.log(Second);
+                    
+
+                        Second = Second + "0"; 
+                        console.log(Second);
+                        
+                        let element = document.getElementById('display');
+                        element.value = (Second);
+                        console.log(2)
+                        
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }    
+            } else if (First.length <= 8){
+                if (First !== 0){
+                    //First = isNaN(First);
+                    //console.log(First);
+                    First = First + "0"; 
+                    console.log(First);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1)
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+                }
+            } else{
+                console.log("８桁以上打たないでください")
+                window.alert("８桁以上打たないでください")
+            }
+        });
+
+        // if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+           //     if (Second < 1){
+             //       for (i=0; i=1; i++){
+                        //First = isNaN(First);
+                        //console.log(First);
+               //         Second = Second + "0"; 
+                 //       console.log(Second);
+                        
+                   //     let element = document.getElementById('display');
+                    //    element.value = (Second);
+                     //   console.log(1)
+                        // document.getElementById("display").value = (First);
+                        // ↑でも同じ動きができる。
+                  //  }
+                //} else if (Second > 0) {
+                    //First = isNaN(First);
+                    //console.log(First);
+                  //  Second = Second + "0"; 
+                   // console.log(Second);
+                    
+                   // let element = document.getElementById('display');
+                    //element.value = (Second);
+                  //  console.log(1)
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+ //               }
+   //         } else if (First < 1){
+     //           for (i=0; i=1; i++){
+                    //First = isNaN(First);
+                    //console.log(First);
+       //             First = First + "0"; 
+         //           console.log(First);
+                    
+           //         let element = document.getElementById('display');
+             //       element.value = (First);
+               //     console.log(1)
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+              //  }
+            //} else if (First > 0) {
+                    //First = isNaN(First);
+                    //console.log(First);
+                //    First = First + "0"; 
+                //    console.log(First);
+                    
+                //    let element = document.getElementById('display');
+               //     element.value = (First);
+             //       console.log(1)
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+           // }
+
+
+
+		// 00ボタン押下時の処理
+		$("#button_00").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+                if (Second.length <= 8){
+                    if (Second > 0){
+                        //console.log(Second);
+                        Second = Second + "00"; 
+                        console.log(Second);
+                        
+                        let element = document.getElementById('display');
+                        element.value = (Second);
+                        console.log(2)
+                    } else if (Second < 1 && Second.indexOf(".") !== -1){
+                            //console.log(Second);
+                            Second = Second + "00"; 
+                            console.log(Second);
+                            
+                            let element = document.getElementById('display');
+                            element.value = (Second);
+                            console.log(2)
+                         }
+                    } else{
+                        console.log("８桁以上打たないでください")
+                        window.alert("８桁以上打たないでください")
+                    }
+            } else if (First.length <= 8){
+                 if (First > 0){
+                    //First = isNaN(First);
+                    //console.log(First);
+                    First = First + "00"; 
+                    console.log(First);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1)
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+                } else if (First < 1 && First.indexOf(".") !== -1){
+                        //console.log(Second);
+                        First = First + "00"; 
+                        console.log(First);
+                        
+                        let element = document.getElementById('display');
+                        element.value = (First);
+                        console.log(2)
+                    }
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+		// ドットボタン押下時の処理
+		$("#button_dot").on("click", function(){
+            
+                if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+                        if (Second.indexOf(".") == -1){
+                            if (Second < 1){
+                                //First = isNaN(First);
+                                //console.log(First);
+                                Second = Second + "."; 
+                                console.log(Second);
+                                
+                                let element = document.getElementById('display');
+                                element.value = (Second);
+                                console.log(2)
+                            } else {
+                                //console.log(Second);
+                                Second = Second + "."; 
+                                console.log(Second);
+                                    
+                                let element = document.getElementById('display');
+                                element.value = (Second);
+                                console.log(2)
+                            }
+                                //var buttonDot = document.getElementById("button_dot");
+                                //buttonDot.Disabled = true;
+                        }
+
+                } else if (First.indexOf(".") == -1){
+                    if (First < 1){
+                        //First = isNaN(First);
+                        //console.log(First);
+                        First = First + "."; 
+                        console.log(First);
+                        
+                        let element = document.getElementById('display');
+                        element.value = (First);
+                        console.log(1)
+                    }　else {
+                        //First = isNaN(First);
+                        //console.log(First);
+                        First = First + "."; 
+                        console.log(First);
+                            
+                        let element = document.getElementById('display');
+                        element.value = (First);
+                        console.log(1)
+                    }
+                    // document.getElementById("display").value = (First);
+                    // ↑でも同じ動きができる。
+                    //var buttonDot = document.getElementById("button_dot");
+                    //buttonDot.Disabled = true;
+                }
+                //var buttonDot = document.getElementById("button_dot");
+                  //  buttonDot.disabled = true; 
+            
+        });
+
+		// 1ボタン押下時の処理
+		$("#button_1").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "1"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "1";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 2ボタン押下時の処理
+		$("#button_2").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "2"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "2";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+		// 3ボタン押下時の処理
+		$("#button_3").on("click", function(){
+
+            if (operator == 0){
+                 result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "3"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "3";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 4ボタン押下時の処理
+		$("#button_4").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "4"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "4";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 5ボタン押下時の処理
+		$("#button_5").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "5"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "5";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 6ボタン押下時の処理
+		$("#button_6").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "6"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "6";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 7ボタン押下時の処理
+		$("#button_7").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "7"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "7";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 8ボタン押下時の処理
+		$("#button_8").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "8"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "8";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 9ボタン押下時の処理
+		$("#button_9").on("click", function(){
+
+            if (operator == 0){
+                result = "";
+            }
+            if (operator === "addition" || operator === "Subtraction" || operator === "multiplication" || operator === "division"){
+               if (Second.length <= 8){
+                    //console.log(Second);
+                    Second = Second + "9"; 
+                    console.log(Second);
+                    
+                    let element = document.getElementById('display');
+                    element.value = (Second);
+                    console.log(2)
+                }  else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+              
+            } else if (First.length <= 8){
+                    First = First + "9";
+                    console.log(First);
+                    let element = document.getElementById('display');
+                    element.value = (First);
+                    console.log(1) 
+                      //First = isNaN(First);
+                //console.log(First);
+
+                // document.getElementById("display").value = (First);
+                // ↑でも同じ動きができる。
+                } else{
+                    console.log("８桁以上打たないでください")
+                    window.alert("８桁以上打たないでください")
+                }
+            
+        });
+
+		// 足し算ボタン押下時の処理
+        $("#button_addition").on("click", function(){
+
+            if (Second > 0){
+                if (result > 0){
+                    if (operator == "addition"){
+                        result = parseFloat(result) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(result) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(result) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(result) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } 
+                } else if (operator == "addition"){
+                        result = parseFloat(First) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(First) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(First) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(First) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "addition";
+                        console.log(operator);
+                        }               
+            }  
+                    operator = "addition";
+                    console.log(operator);
+                    
+        });
+
+		// 引き算ボタン押下時の処理
+		$("#button_subtraction").on("click", function(){
+            if (Second > 0){
+                if (result > 0){
+                    if (operator == "addition"){
+                        result = parseFloat(result) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(result) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(result) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(result) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } 
+                } else if (operator == "addition"){
+                        result = parseFloat(First) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(First) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(First) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(First) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "Subtraction";
+                        console.log(operator);
+                        }               
+            }  
+                    operator = "Subtraction";
+                    console.log(operator);
+        });
+
+		// 掛け算ボタン押下時の処理
+		$("#button_multiplication").on("click", function(){
+            if (Second > 0){
+                if (result > 0){
+                    if (operator == "addition"){
+                        result = parseFloat(result) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(result) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(result) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(result) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } 
+                } else if (operator == "addition"){
+                        result = parseFloat(First) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(First) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(First) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(First) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "multiplication";
+                        console.log(operator);
+                        }               
+            }  
+                    operator = "multiplication";
+                    console.log(operator);
+        });
+
+		// 割り算ボタン押下時の処理
+		$("#button_division").on("click", function(){
+            if (Second > 0){
+                if (result > 0){
+                    if (operator == "addition"){
+                        result = parseFloat(result) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(result) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(result) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(result) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } 
+                } else if (operator == "addition"){
+                        result = parseFloat(First) + parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "Subtraction"){
+                        result = parseFloat(First) - parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "multiplication"){
+                        result = parseFloat(First) * parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                    } else if (operator == "division"){
+                        result = parseFloat(First) / parseFloat(Second);
+                        console.log(result);
+                        let element = document.getElementById('display');
+                        element.value = (result);
+                        First = "";
+                        Second = "";
+                        operator = "";
+                        operator = "division";
+                        console.log(operator);
+                        }               
+            }  
+                    operator = "division";
+                    console.log(operator);
+        });
+
+		// 計算ボタン押下時の処理
+		$("#button_calculation").on("click", function(){
+
+            if (result > 0){
+
+                if (operator == "addition"){
+                    result = parseFloat(result) + parseFloat(Second);
+                    console.log(result);
+                    let element = document.getElementById('display');
+                    element.value = (result);
+                    First = "";
+                    Second = "";
+                    operator = "";
+                } else if (operator == "Subtraction"){
+                    result = parseFloat(result) - parseFloat(Second);
+                    console.log(result);
+                    let element = document.getElementById('display');
+                    element.value = (result);
+                    First = "";
+                    Second = "";
+                    operator = "";
+                } else if (operator == "multiplication"){
+                    result = parseFloat(result) * parseFloat(Second);
+                    console.log(result);
+                    let element = document.getElementById('display');
+                    element.value = (result);
+                    First = "";
+                    Second = "";
+                    operator = "";
+                } else if (operator == "division"){
+                    result = parseFloat(result) / parseFloat(Second);
+                    console.log(result);
+                    let element = document.getElementById('display');
+                    element.value = (result);
+                    First = "";
+                    Second = "";
+                    operator = "";
+                }
+
+            } else if (operator == "addition"){
+                result = parseFloat(First) + parseFloat(Second);
+                console.log(result);
+                let element = document.getElementById('display');
+                element.value = (result);
+                First = "";
+                Second = "";
+                operator = "";
+            } else if (operator == "Subtraction"){
+                result = parseFloat(First) - parseFloat(Second);
+                console.log(result);
+                let element = document.getElementById('display');
+                element.value = (result);
+                First = "";
+                Second = "";
+                operator = "";
+            } else if (operator == "multiplication"){
+                result = parseFloat(First) * parseFloat(Second);
+                console.log(result);
+                let element = document.getElementById('display');
+                element.value = (result);
+                First = "";
+                Second = "";
+                operator = "";
+            } else if (operator == "division"){
+                result = parseFloat(First) / parseFloat(Second);
+                console.log(result);
+                let element = document.getElementById('display');
+                element.value = (result);
+                First = "";
+                Second = "";
+                operator = "";
+            }
+            First = "";
+            Second = "";
+            operator = "";
+
+
+            // result
+            // First
+            // Second
+		});
+
+		// 戻るボタン押下時の処理
+		$("#button_back").on("click", function(){
+            if (First > 0 && Second > 0){
+                Second = Second.substring(0, Second.length - 1);
+                console.log(Second);
+                let element = document.getElementById('display');
+                element.value = (Second); 
+            } else if (First > 0 && Second == 0){
+                First = First.substring(0, First.length - 1);
+                console.log(First);
+                let element = document.getElementById('display');
+                element.value = (First);
+            }
+            if (result > 0 && Second > 0){
+                Second = Second.substring(0, Second.length - 1);
+                console.log(Second);
+                let element = document.getElementById('display');
+                element.value = (Second); 
+            }
+
+		});
+
+		// クリアボタン押下時の処理
+		$("#button_c").on("click", function(){
+            if (result > 0){
+                if (Second >= 0){
+                    Second = "";
+                    var element = document.getElementById('display');
+                    element.value = (Second);
+                    //operator = "";
+                } else {
+                    result = "";
+                    var element = document.getElementById('display');
+                    element.value = (result);
+                    //operator = "";
+                }
+            } else if (Second > 0){
+                Second = "";
+                var element = document.getElementById('display');
+                element.value = (Second);
+                //operator = "";
+            } else {
+                First = "";
+                var element = document.getElementById('display');
+                element.value = (First);
+                //operator = "";
+            }
+		});
+
+		// オールクリアボタン押下時の処理
+		$("#button_ac").on("click", function(){
+        First = "";
+        var element = document.getElementById('display');
+        element.value = (First);
+
+        Second = "";
+        var element = document.getElementById('display');
+        element.value = (Second);
+        operator = "";
+		
+        result = "";
+        var element = document.getElementById('display');
+        element.value = (result);
+        operator = "";
+		});
+
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>練習問題</title>
+
+	<style>
+    	/* ここにCSSを書く */
+	</style>
+</head>
+
+<body>
+    <!-- ここに画面に表示する内容を書く -->
+	<div id="test"></div>
+	
+	
+	<script>
+	    // ここにJavaScriptを書く
+
+
+        let cl;
+        let a;
+        let ster = "▼";
+        let sp = "　";
+
+        loop(1,10)
+        loop(2,9)
+        loop(3,8)
+        loop(4,7)
+        loop(5,6)
+        loop(6,5)
+        loop(7,4)
+        loop(8,3)
+        loop(9,2)
+        loop(10,1)
+
+        function loop(x,y){
+            for (cl=1; cl<x; cl++){
+                sp = sp + "　";
+            }
+            for (a=1; a<y; a++){
+                ster = ster + "▼▼";
+            }
+                $("#test").append("<div>"+sp+ster+"</div>");
+                ster = "▼";
+                sp = "　";
+        }  
+	</script>
+</body>
+
+</html>

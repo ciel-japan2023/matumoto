@@ -1,0 +1,15 @@
+INSERT INTO em_t_stock_item VALUES ("CN001","pc001","2");
+INSERT INTO em_t_stock_item VALUES ("CN001","pc999","1");
+INSERT INTO em_t_stock_item VALUES ("CN001","sp001","3");
+INSERT INTO em_t_stock_item VALUES ("CN002","pc001","10");
+INSERT INTO em_t_stock_item VALUES ("CN002","pc002","20");
+INSERT INTO em_t_stock_item VALUES ("CN002","sp001","30");
+INSERT INTO em_t_stock_item VALUES ("CI001","pc002","5");
+INSERT INTO em_t_stock_item VALUES ("CI001","sp002","4");
+INSERT INTO em_t_stock_item VALUES ("CI001","sp999","1");
+INSERT INTO em_t_stock_item VALUES ("CI002","pc001","7");
+INSERT INTO em_t_stock_item VALUES ("CI002","pc002","13");
+INSERT INTO em_t_stock_item VALUES ("CI002","SP001","18");
+INSERT INTO em_t_stock_item VALUES ("CI002","sp002","12");
+INSERT INTO em_t_stock_item VALUES ("CI003","pc001","999");
+INSERT INTO em_t_stock_item VALUES ("CI003","pb001","1");
